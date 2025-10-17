@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Speakers — ARIIA 2026</title>
+  <meta name="robots" content="noindex">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --blue:#0b78ff;
+      --muted-dark:#fefeff;
+      --card-bg:#efefef;
+      --card-inner:#f6f6f6;
+      --accent:#0b67b3;
+      --maxwidth:1200px;
+      --nav-height:74px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;background:#fff;color:#111}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    html{scroll-padding-top:calc(var(--nav-height) + 20px)}
+
+    /* Header (same as committee) */
+    header{position:fixed;top:0;left:0;right:0;height:var(--nav-height);background:rgba(247,248,250,.75);display:flex;align-items:center;justify-content:center;z-index:120;padding:10px 20px}
+    .nav-wrap{max-width:var(--maxwidth);width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;margin:0 auto}
+    .logo img{height:34px}
+    nav a{color:#12258d;font-family:"Montserrat",sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:12px;margin:0 8px;opacity:.92}
+    nav a.active{opacity:1;color:#000;text-decoration:underline}
+    .register-btn{background:var(--blue);color:#fff;padding:8px 12px;border-radius:6px;font-weight:700;font-family:"Montserrat"}
+    header *{position:relative;z-index:130}
+
+    /* Hero */
+    .hero{margin-top:var(--nav-height);height:260px;background-image:url('images/blue_banner.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;position:relative}
+    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,6,18,.82),rgba(3,6,18,.62));z-index:1}
+    .hero-topbar{position:absolute;right:0;top:12px;z-index:2;padding:6px 18px;color:#fff;font-weight:700;font-family:"Montserrat";font-size:13px;opacity:.95}
+
+    /* Main */
+    main{min-height:60vh;padding:64px 40px 160px;display:flex;justify-content:center;background:#fff}
+    .card{width:100%;max-width:1100px;background:var(--card-bg);border-radius:12px;box-shadow:0 18px 48px rgba(2,6,23,.08);padding:28px}
+    .inner{background:var(--card-inner);padding:26px;border-radius:8px}
+    h2.title{font-family:"Montserrat",sans-serif;font-weight:800;letter-spacing:.02em;margin:0 0 16px;font-size:32px;color:#0b3f7a}
+    .kicker{width:72px;height:6px;background:var(--accent);margin:0 0 24px;border-radius:6px}
+
+    /* Speakers grid (matches screenshot style) */
+    .speakers-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 34px 28px;
+      max-width:980px;
+      margin: 0 auto;
+    }
+    .speaker{
+      text-align:center;
+    }
+    .avatar-wrap{
+      width:150px;height:150px;margin:0 auto 12px;
+      border-radius:50%;
+      border:4px solid #1c6fd6;       /* blue ring */
+      overflow:hidden;
+      box-shadow:0 6px 16px rgba(28,111,214,.18);
+      background:#fff;
+    }
+    .avatar{width:100%;height:100%;object-fit:cover}
+    .speaker .name{
+      font-weight:800;
+      color:#0b335a;
+      margin:6px 0 6px;
+    }
+    .speaker .affil{
+      font-size:12px;
+      color:#5b6b7f;
+      line-height:1.2;
+    }
+
+    /* Responsive */
+    @media (max-width:980px){
+      main{padding:40px 22px 120px}
+      .card{padding:20px;max-width:860px;border-radius:10px}
+      .inner{padding:18px}
+      h2.title{font-size:26px;text-align:center}
+      .speakers-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:640px){
+      .card{width:96%}
+      h2.title{font-size:22px}
+      .kicker{width:48px;height:5px;margin:0 auto 20px}
+      .speakers-grid{grid-template-columns:1fr;gap:28px}
+      .avatar-wrap{width:140px;height:140px}
+    }
+
+    /* Footer (same as committee) */
+    .site-footer{background:#0c0c0c;color:rgba(255,255,255,.95);margin-top:36px;font-size:14px;line-height:1.5}
+    .footer-top{padding:40px 18px}
+    .footer-grid{max-width:var(--maxwidth);margin:0 auto;display:grid;grid-template-columns:1fr 380px 360px;gap:28px;align-items:start}
+    .site-footer h3{color:#fff;font-family:"Montserrat",sans-serif;font-weight:800;letter-spacing:.04em;margin:0 0 12px}
+    .footer-about .footer-desc{color:rgba(255,255,255,.85);font-size:13px;max-width:520px}
+    .footer-contact .contact-block{color:rgba(255,255,255,.85);font-size:13px;margin-bottom:8px}
+    .footer-contact .contact-email a{color:#9fc8ff;text-decoration:none;font-weight:700}
+    .footer-contact .contact-email a:hover{text-decoration:underline}
+    .socials{margin-top:12px}
+    .social-icon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:rgba(255,255,255,.06);border-radius:50%;margin-right:8px}
+    .social-icon svg{display:block;margin:auto}
+    .footer-map iframe{width:100%;max-width:350px;height:210px;border-radius:6px;box-shadow:0 12px 30px rgba(2,6,23,.36);border:0}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.04);padding:12px 18px;background:rgba(0,0,0,.92)}
+    .footer-bottom-inner{max-width:var(--maxwidth);margin:0 auto;text-align:center;color:rgba(255,255,255,.62);font-size:13px}
+  </style>
+</head>
+<body>
+
+  <!-- fixed header -->
+  <header>
+    <div class="nav-wrap">
+      <div class="logo">
+        <img src="images/logo.png" alt="ARIIA logo" onerror="this.style.display='none'">
+      </div>
+
+      <nav aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="conference.html">Conference</a>
+        <a class="active" href="speakers.html">Speakers</a>
+        <a href="tracks.html">Tracks</a>
+        <a href="paper-submission.html">Paper Submission</a>
+        <a href="publication.html">Publication</a>
+        <a href="committee.html">Committee</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+
+      <div>
+        <a class="register-btn" href="submission.html#register">REGISTER</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- hero/banner -->
+  <section class="hero" role="banner" aria-label="Speakers hero">
+    <div class="hero-topbar">SPEAKERS</div>
+  </section>
+
+  <!-- main body -->
+  <main role="main">
+    <article class="card" aria-labelledby="speakersTitle">
+      <div class="inner">
+        <h2 id="speakersTitle" class="title">Invited Speakers</h2>
+        <div class="kicker" aria-hidden="true"></div>
+
+        <section class="speakers-grid" aria-label="Speakers list">
+          <!-- Speaker 1 -->
+          <div class="speaker">
+            <div class="avatar-wrap">
+              <img class="avatar" src="images/amit.jfif" alt="Portrait of Prof. Mark Leeson">
+            </div>
+            <div class="name">Dr. Amit Dwivedi</div>
+            <div class="affil">
+              University of Warwick<br>
+              United Kingdom
+            </div>
+          </div>
+
+          <!-- Speaker 2 -->
+          <div class="speaker">
+            <div class="avatar-wrap">
+              <img class="avatar" src="images/lalit.jpeg" alt="Portrait of Dr. Lalit Garg">
+            </div>
+            <div class="name">Dr. Lalit Garg</div>
+            <div class="affil">
+              University of Malta<br>
+              Malta
+            </div>
+          </div>
+
+          <!-- Speaker 3 -->
+          <div class="speaker">
+            <div class="avatar-wrap">
+              <img class="avatar" src="images/Mayukh Das.jpeg" alt="Portrait of Dr. Dayal R. Parhi">
+            </div>
+            <div class="name">Mayukh Das S </div>
+            <div class="affil">
+              Microsoft<br>
+              India
+            </div>
+          </div>
+
+          <!-- Speaker 4 -->
+          <div class="speaker">
+            <div class="avatar-wrap">
+              <img class="avatar" src="images/Dr. Harikrishnan A.L. Ramiah.jpeg" alt="Portrait of Dr. Harikrishnan Ramaiah">
+            </div>
+            <div class="name">Dr. Harikrishnan Ramaiah</div>
+            <div class="affil">
+              Universiti Malaya<br>
+              Malaysia
+            </div>
+          </div>
+
+          <!-- Speaker 5 -->
+          <div class="speaker">
+            <div class="avatar-wrap">
+              <img class="avatar" src="images/ketan.png" alt="Portrait of Dr. Ketan Kotecha">
+            </div>
+            <div class="name">Dr. Ketan Kotecha</div>
+            <div class="affil">
+              Symbiosis Institute of Technology<br>
+              India
+            </div>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <!-- footer -->
+  <footer class="site-footer" role="contentinfo" aria-label="Site footer">
+    <div class="footer-top">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <h3>ARIIA</h3>
+          <p class="footer-desc">
+            The International Conference on Augmented Reality, Intelligent Systems, and Industrial Automation (ARIIA-2024) promotes the exchange of ideas, research and industry collaboration.
+          </p>
+        </div>
+
+        <div class="footer-contact" aria-label="Contact information">
+          <h3>Contact Us</h3>
+          <address class="contact-block">
+            <strong>Convener, ARIIA-2026</strong><br>
+            Department of Mechanical and Industrial Engg.<br>
+            Manipal Institute of Technology, MAHE<br>
+            Manipal, Udupi, Karnataka - 576104, India
+          </address>
+
+          <p class="contact-email">
+            Email: <a href="mailto:ariia.2024@manipal.edu">ariia.2024@manipal.edu</a>
+          </p>
+
+          <div class="socials">
+            <a href="https://www.linkedin.com" class="social-icon" aria-label="LinkedIn" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4.98 3.5a2.2 2.2 0 1 1 0 4.4 2.2 2.2 0 0 1 0-4.4zM3 8.9h4v12H3v-12zM9 8.9h3.8v1.7h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.78 2.66 4.78 6.12V21h-4v-5.1c0-1.2-.02-2.74-1.67-2.74-1.68 0-1.94 1.31-1.94 2.66V21H9v-12z" fill="#fff"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-map" aria-label="Conference location map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3881.963636111687!2d74.78820896846788!3d13.352537277706052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbca4a7d2c4edb7%3A0x8d588d4fb81d861f!2sManipal%20Institute%20of%20Technology!5e0!3m2!1sen!2sin!4v1714196734142!5m2!1sen!2sin"
+            width="350" height="210" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Manipal Institute of Technology location"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <small>© Department of Digital And Information Technology – Manipal Academy of Higher Education</small>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
