@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function () {
       dots.forEach((d, i) => d.classList.toggle('active', i === nextIndex));
     }
 
-    // sync hero text
     if (heroTexts.length) {
       heroTexts.forEach((t, i) => {
         const active = i === nextIndex;
@@ -53,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   if (slides.length) {
-    // dots: click + keyboard
     if (dots.length) {
       dots.forEach(d => {
         d.addEventListener('click', () => {
@@ -70,24 +68,20 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    // pause on hover (desktop)
     if (hero) {
       hero.addEventListener('mouseenter', stop);
       hero.addEventListener('mouseleave', start);
-      // arrow-key navigation when hero is focused
       hero.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowRight') { next(); start(); }
         if (e.key === 'ArrowLeft')  { prev(); start(); }
       });
-      hero.setAttribute('tabindex', '-1'); // allow programmatic focus if needed
+      hero.setAttribute('tabindex', '-1');
     }
 
-    // pause when tab not visible
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) stop(); else start();
     });
 
-    // init
     setSlide(0);
     start();
   }
@@ -107,6 +101,36 @@ document.addEventListener('DOMContentLoaded', function () {
   })();
 
   /* -------------------------
+     Header solid switch (after hero)
+     Makes header solid when you're past the hero/top banner
+     ------------------------- */
+  (function headerSolidSwitch() {
+    const header = document.getElementById('pageHeader') || document.querySelector('.top-header');
+    if (!header) return;
+
+    // Observe either the slideshow hero or the simple .topimage banner (tracks page, etc.)
+    const heroSection = document.querySelector('.hero-slideshow, .topimage');
+
+    // If no hero exists on the page, just keep header solid
+    if (!heroSection) {
+      header.classList.add('solid');
+      return;
+    }
+
+    const io = new IntersectionObserver(([entry]) => {
+      // When the hero is visible near the top, keep header transparent;
+      // once it's out of view, make header solid for readability.
+      if (entry.isIntersecting) {
+        header.classList.remove('solid');
+      } else {
+        header.classList.add('solid');
+      }
+    }, { rootMargin: '-72px 0px 0px 0px' });
+
+    io.observe(heroSection);
+  })();
+
+  /* -------------------------
      Timeline reveal (IntersectionObserver)
      ------------------------- */
   (function timelineReveal() {
@@ -117,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('in-view');
-          io.unobserve(entry.target); // reveal once
+          io.unobserve(entry.target);
         }
       });
     }, { threshold: 0.22 });
@@ -148,24 +172,20 @@ document.addEventListener('DOMContentLoaded', function () {
       const sub = root.querySelector('.submenu');
       if (!btn || !sub) return;
 
-      // initial state
       btn.setAttribute('aria-expanded', 'false');
       sub.style.display = 'none';
 
-      // click/tap toggle
       btn.addEventListener('click', (e) => {
         const expanded = btn.getAttribute('aria-expanded') === 'true';
         closeAll(root);
         btn.setAttribute('aria-expanded', String(!expanded));
         sub.style.display = expanded ? 'none' : 'block';
         if (!expanded) {
-          // move focus to first link for accessibility
           const firstItem = sub.querySelector('a,button');
           if (firstItem) firstItem.focus({ preventScroll: true });
         }
       });
 
-      // keyboard: ESC to close
       root.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           btn.setAttribute('aria-expanded', 'false');
@@ -175,7 +195,6 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
 
-    // click outside to close
     document.addEventListener('click', (e) => {
       const anyOpen = document.querySelector('.nav-center .has-submenu .nav-link[aria-expanded="true"]');
       if (anyOpen && !anyOpen.parentElement.contains(e.target)) closeAll();
@@ -219,4 +238,38 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// Countdown for ARIIA 2026
+(function countdownInit(){
+  const el = document.querySelector('.info-bar .countdown');
+  if (!el) return;
+
+  const targetStr = el.getAttribute('data-date');
+  const target = new Date(targetStr);
+
+  const dEl = el.querySelector('.cd-d');
+  const hEl = el.querySelector('.cd-h');
+  const mEl = el.querySelector('.cd-m');
+  const sEl = el.querySelector('.cd-s');
+
+  const pad = n => String(n).padStart(2,'0');
+
+  function tick(){
+    const now = new Date();
+    let diff = Math.max(0, target - now);
+
+    const d = Math.floor(diff / (1000*60*60*24)); diff %= 1000*60*60*24;
+    const h = Math.floor(diff / (1000*60*60));    diff %= 1000*60*60;
+    const m = Math.floor(diff / (1000*60));       diff %= 1000*60;
+    const s = Math.floor(diff / 1000);
+
+    dEl.textContent = d;
+    hEl.textContent = pad(h);
+    mEl.textContent = pad(m);
+    sEl.textContent = pad(s);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+})();
 
