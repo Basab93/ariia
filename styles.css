@@ -176,7 +176,11 @@ background:#ffffff;
 
 /* ensure header links sit above overlay */
 /* .top-header * { position: relative; z-index: 70; } */
-.top-header { overflow: hidden; }
+/* .top-header { overflow: hidden; } */
+
+.top-header { overflow: visible; }
+
+.nav-center .has-submenu { position: relative; } 
 
 /* =========================
    HERO SLIDESHOW
