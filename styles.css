@@ -1034,3 +1034,45 @@ body { padding-top: calc(var(--nav-height)); }
 .contact-card a:hover {
   text-decoration: underline;
 }
+/* Base */
+#partners { background:#fff; padding:48px 16px; border-top:1px solid #e9edf3; }
+.partners-wrap { max-width:1100px; margin:0 auto; }
+.logo-group { text-align:center; }
+.logo-group h3 {
+  font-family:"Montserrat",sans-serif; font-weight:700; font-size:18px;
+  color:#142b6f; margin:0 0 14px;
+}
+.logo-list { display:flex; flex-wrap:wrap; justify-content:center; gap:24px; }
+.logo-list img { max-height:80px; width:auto; object-fit:contain; }
+
+/* Grid: 2-column */
+.partners-grid {
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:36px 48px;  /* row gap, column gap */
+}
+
+/* SDG block normal size inside its cell */
+.sdg .logo-list img {
+  max-height:140px;
+  width:auto;
+  border-radius:6px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+/* Adjust specific logos */
+.logo-list img[alt*="Warwick"] { max-height:64px; }
+.logo-list img[alt*="Malta"]   { max-height:64px; }
+.logo-list img[alt*="Manipal"] { max-height:70px; }
+.logo-list img[alt*="Jaipur"]  { max-height:70px; }
+
+/* Responsive */
+@media (max-width:768px){
+  .partners-grid { grid-template-columns:1fr; gap:28px; }
+  .logo-list img { max-height:60px; }
+  .sdg .logo-list img { max-height:120px; }
+}
+
+
+
+
